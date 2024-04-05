@@ -1,0 +1,22 @@
+package ezen_messenger1;
+
+import java.io.IOException;
+import java.util.Scanner;
+
+public class test1 {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		Scanner sc = new Scanner(System.in);
+		//회원가입 기능 체크 끝
+		Login n = new Login();
+		n.checkLogin(sc);
+		
+		
+
+		
+		sc.close();
+		
+
+	}
+
+}

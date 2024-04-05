@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>UP DOWN GAME</h1>
+    <div></div>
+    1.랜덤 숫자만들기 버튼을 클릭하면 컴퓨터가 1~99 숫자 1개를 생성<br>
+    2.숫자가 생성되면 컴퓨터가 랜덤으로 숫자 생성했습니다. 문구 출력<br>
+    3.input란 1~99 중 숫자를 입력하고 맞추기 버튼을 클릭하면<br>
+    4.컴퓨터의 숫자보다 높은숫자면 down , 낮으면 up 이라고 출력<br>
+    5.숫자를 맞추면 정답입니다! 숫자는 ?? 였습니다 출력<br>
+    </div>
+    <div>
+        <button type="button" onclick="comRandom()">랜덤숫자 생성</button>
+        <button type="button" onclick="retry()">다시 시도하기</button>
+        <h3 id="print"></h3>
+    </div>
+    <div>
+        <input type="text" id="playNum"><button type="button" onclick="updown()">정답!!!</button>
+        <h3 id="result"></h3>
+    </div>
+    <script>
+        let com = 0;
+        let hf = document.getElementById('print');
+        let result = document.getElementById('result');
+        let point = 0;
+        let count = 0;
+
+        function retry() {
+            count = 0;
+            point = 0;
+            comRandom();
+            
+            result.innerText = "";
+        }
+
+        function comRandom() {
+            com = Math.floor(Math.random() * 99) + 1;
+            hf.innerText = `컴퓨터가 랜덤수(1~99)까지 생성했습니다.`;
+            return com;
+        }
+
+        function updown() {
+            let play = document.getElementById('playNum').value;
+            count++;
+            console.log(com);
+            console.log(count);
+            console.log(play);
+            if (play == com) {
+                point = 0;
+
+            } else if (play > com) {
+                point = -1;
+            } else {
+                point = 1;
+            }
+
+            printResult(point, play);
+        }
+        function printResult(point, play) {
+            result.innerText =
+                (point == 1) ? `시도횟수 ${count}, up입니다.` :
+                    (point == -1) ? `시도횟수 ${count}, down입니다.` : `시도횟수 ${count}, 정답입니다!!. 컴퓨터의 숫자는 ${com}입니다.`;
+            if (play >= 100) {
+                count--;
+                result.innerText = '다시 입력하세요.';
+            }
+        }
+    </script>
+</body>
+
+</html>

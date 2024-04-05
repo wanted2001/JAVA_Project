@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const memberObject = {
+            name: 'hong',
+            age: 39,
+            married: true,
+            favors: ['baseball', 'game', 'movie', 'etc...']
+        };
+
+        const people = [];
+        for (let i = 0; i < 5; i++) {
+            people.push(memberObject);
+        }
+        console.log(people);
+        people[1].name = 'kim';
+        console.log(people);
+
+        //객체에서 값을 빼서 console에 찍기
+        //배열 순회
+        //for of : 배열에 내용을 탐색할때
+        //for in : 객체 안의 내용을 탐색할떄
+        for (let member of people) {
+            console.log(member);
+            for (let keyName in member) {
+                if (keyName == 'favors') {
+                    for (let fa of member[keyName]) {
+                        console.log(fa);
+                    }
+                } else {
+                    console.log(keyName);
+                    console.log(member[keyName]); //me['name']
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

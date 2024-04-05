@@ -1,0 +1,134 @@
+package ezen_messenger;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class FriendsManager{
+	/* [친구]
+	 * 친구 리스트 출력 
+	 * 
+	 * 친구 추가
+	 * 
+	 * 친구 삭제
+	 * 닉네임 달기(천천히)
+	 */
+	//친구 리스트
+	
+	public void friendsList() throws IOException{
+		BufferedReader tmp = new BufferedReader(new FileReader("C:\\Messenger\\tmp.txt"));
+		String tp = tmp.readLine();
+		BufferedReader fl = new BufferedReader(new FileReader(tp+"\\friendsList.txt"));
+		System.out.println("=========친구 리스트=======");
+		while(true) {
+			ArrayList<String> friList = new ArrayList<String>();
+			String fri = fl.readLine(); // 한라인 읽어오기
+			if(fri==null) {
+				break;;
+			}
+			friList.add(fri);
+			System.out.println("|"+fri+" 상태");
+			
+		}
+		fl.close();	
+		tmp.close();
+	}
+	
+	//친구 리스트
+	public void  friendsAdd(Scanner sc) throws IOException {
+		BufferedReader tmp = new BufferedReader(new FileReader("C:\\Messenger\\tmp.txt"));
+		String tp = tmp.readLine();
+		BufferedReader fa = new BufferedReader(new FileReader("C:\\Messenger\\memberList.txt"));
+		ArrayList<String> list = new ArrayList<String>();
+		while(true) {
+			String add = fa.readLine();
+			if(add==null) {
+				break;
+			}	
+			String id = add.substring(0,add.indexOf(" "));
+			list.add(id);
+		}
+		System.out.println("=========회원 리스트=======");
+		for(String l : list) {
+			System.out.println("|"+l+" 상태");
+		}
+		BufferedReader addfri = new BufferedReader(new FileReader(tp+"\\friendsList.txt"));
+		ArrayList<String> addfriendsList = new ArrayList<String>();
+		while(true) {
+			String addfriends = addfri.readLine();
+			if(addfriends==null) {
+				break;
+			}	
+			String id = addfriends;
+			addfriendsList.add(id);
+		}
+		addfri.close();
+		tmp.close();
+		fa.close();
+		System.out.println("친구추가할 사람을 입력하세요>");
+		String a = sc.next();
+		for(int j=0; j<list.size(); j++) {
+			if(!a.equals(list.get(j))) {
+				System.out.println("등록되지 않은 회원입니다.");
+				return;
+			}
+		}
+		
+		
+		for(int i=0; i<addfriendsList.size(); i++) {
+			if(addfriendsList.get(i).equals(a)) {
+				System.out.println("친구가 이미 있습니다.");
+				return;
+				}
+		}
+		System.out.println("친구 추가 되었습니다.");
+		FileWriter fw = new FileWriter(tp+"\\friendsList.txt",true);
+		fw.append(a+"\r\n");
+		fw.close();
+		}
+		
+	
+	public void frienddel(Scanner sc) throws IOException {
+		BufferedReader tmp = new BufferedReader(new FileReader("C:\\Messenger\\tmp.txt"));
+		String tp = tmp.readLine();
+		BufferedReader dellist = new BufferedReader(new FileReader(tp+"\\friendsList.txt"));
+		ArrayList<String> del = new ArrayList<String>();
+		while(true) {
+			String add = dellist.readLine();
+			if(add==null) {
+				break;
+			}	
+			String id = add;
+			del.add(id);
+		}
+		for(String l : del) {
+			System.out.println("|"+l+" 상태");
+		}
+		dellist.close();
+		System.out.println("친구삭제할 이름을 입력하세요>");
+		String d = sc.next();
+		for(int i=0; i<del.size(); i++) {
+			if(del.get(i).equals(d)) {
+				del.remove(i);
+				System.out.println("친구 삭제 완료");
+			}
+		}
+		FileWriter newfriendslist = new FileWriter(tp+"\\friendsList.txt");
+		for(int i=0; i<del.size(); i++) {
+			String data = del.get(i);
+			newfriendslist.append(data+"\r\n");
+		}
+		tmp.close();
+		newfriendslist.close();
+		
+		
+		
+	}
+	
+	
+	
+
+}

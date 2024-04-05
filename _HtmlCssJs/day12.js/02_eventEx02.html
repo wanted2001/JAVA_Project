@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        가격: <input type="text" id="money">원<br>
+        할인율: <input type="text" id="sale">%<br>
+        <button type="button" onclick="cal()">할인가격 계산</button>
+    </form>
+    <p id="p1"></p>
+
+    <script>
+        const pri = document.getElementById('p1');
+        function cal() {
+            let money = parseInt(document.getElementById('money').value);
+            let sale = Number(document.getElementById('sale').value);
+            let resultmo = money * (sale / 100);
+            let result = money - (resultmo);
+            pri.innerText = `가격: ${money}, 할인율: ${sale}%, 할인금액: ${resultmo}, 지불금 : ${result}`;
+        }
+
+
+
+    </script>
+</body>
+
+</html>

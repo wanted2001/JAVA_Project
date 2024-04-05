@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        향상된 for문
+    </h1>
+    <ul>
+        <li>
+            for of : 배열안에 내용을 탐색할때 사용[]
+            for(let value of Array){
+            code;
+            }
+        </li>
+        <li>
+            for in : 객체 안에 내용을 탐색할때 사용 { }
+            for(let value in Object){
+            <!-- value = key -->
+            code;
+            }
+        </li>
+    </ul>
+    <h3>약수 출력 (1~100까지 입력한 숫자의 약수 출력)</h3>
+    <!-- 100이 넘어가면 alert 띄움 -->
+    <input type="text" id="number">
+    <button onclick="yak()">약수 출력</button>
+    <h3 id="result">
+        약수 값 출력/ 개수 <br>
+    </h3>
+    <script> 
+
+        function yak() {
+            let bt = document.getElementById('number').value;
+            console.log(bt);
+            let h = document.getElementById('result');
+            let h1 = document.getElementById('result').value;
+            let count = 0;
+            let str = '';
+            if(bt>100){
+                location.reload();
+                alert('100을 넘길수 없습니다.');
+
+            }
+            for (let i = 1; i <= bt; i++) {
+                while(bt % i == 0) {
+                    str+=`${i} `;
+                    count++;
+                    break;
+                }
+            }
+            h.innerHTML = `${h.innerHTML}${str}<br>총 ${count}개</p>`;
+        }
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,48 @@
+package CardpackTest;
+
+public class Card2 {
+	private int num; 
+	private char shape;
+	
+	public Card2() {}
+	
+	
+	public void print() {
+		System.out.println(shape+num);
+	}
+	
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		switch(num) {
+		case 1 : this.num = (char)'A'; break;
+		case 11: this.num = (char)'j'; break;
+		case 12: this.num = (char)'Q'; break;
+		case 13: this.num = (char)'K'; break;
+		}
+	}
+
+	public char getShape() {
+		return shape;
+	}
+
+	public void setShape(char shape) {
+		if(shape=='♥'||shape=='◆'||shape=='♠'||shape=='♣') {
+			this.shape = shape;
+		}else {
+			shape='♥';
+		}
+		
+	}
+
+
+	@Override
+	public String toString() {
+		return shape+":"+num;
+	}
+	
+	
+	
+}

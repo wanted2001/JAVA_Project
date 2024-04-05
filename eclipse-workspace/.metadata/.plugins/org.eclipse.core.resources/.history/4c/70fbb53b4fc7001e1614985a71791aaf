@@ -1,0 +1,70 @@
+package ezen_messenger1;
+
+//계정 매니저
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class AccountManager {
+	/*
+	 * 회원가입 리스트 생성 txt파일로 / 이름은 : memberList 로그인은 txt를 불러와서 일치 했을때 긍정s 로그인
+	 */
+	private HashMap<String, String> account = new HashMap<>();
+
+	public AccountManager() {
+	}
+
+	public void AccountAddres(Scanner sc) throws IOException {
+		FileWriter fw = new FileWriter("memberList.txt", true);
+
+		System.out.println("Emali을 생성해주세요>");
+		System.out.println("ex)OOO@exam.com");
+		String addres = sc.next();
+
+		System.out.println("Password를 생성해주세요>");
+		String Password = sc.next();
+
+		fw.close();
+		if (account.containsKey(addres)) {
+			System.out.println("이미 등록된 아이디입니다.");
+			return;
+		}
+
+		System.out.println("등록되었습니다.");
+
+		account.put(addres, Password);
+
+		for (String key : account.keySet()) {
+			fw.append(key + " " + account.get(key));
+			fw.append("\r\n");
+		}
+		fw.close();
+	}
+
+	public void fileAccountList() throws IOException {
+		FileWriter fs = new FileWriter("memberListManager.txt");
+		BufferedWriter bw = new BufferedWriter(fs);
+		StringBuffer sb = new StringBuffer();
+
+		String data = null;
+		sb.append("=======계정 리스트=======");
+		sb.append("\r\n");
+
+		for (String key : account.keySet()) {
+			sb.append("Mail(ID): " + key);
+			sb.append("\r\n");
+			sb.append("Mail(Password): " + account.get(key));
+			sb.append("\r\n");
+			sb.append("-------------------\r\n");
+		}
+
+		data = sb.toString();
+		System.out.println(data);
+		System.out.println("======================");
+		bw.close();
+	}
+
+}

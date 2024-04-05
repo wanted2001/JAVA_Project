@@ -1,0 +1,22 @@
+package 시험;
+
+import java.util.Scanner;
+
+public class RandomSum {
+
+	public static void main(String[] args) {
+		int count=0,sum =0;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("난수의 개수를 입력하세요>");
+		count = sc.nextInt();
+		for(int i=0; i<=count; i++) {
+			int ran = (int)(Math.random()*99);
+			sum+=ran;
+		}
+		System.out.println("난수 "+count+"개의 합은 "+sum);
+		
+		sc.close();
+
+	}
+
+}

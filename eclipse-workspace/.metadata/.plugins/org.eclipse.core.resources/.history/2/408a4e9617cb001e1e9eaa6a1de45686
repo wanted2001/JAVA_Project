@@ -1,0 +1,11 @@
+package CardpackTest;
+
+public class Card2 {
+	private int num; 
+	private char shape;
+	
+	public Card2() {}
+	
+	
+
+}

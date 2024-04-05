@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // class 객체 생성 / 일반 객체
+        // 일반 객체
+        // let myAccount = {
+        //     name: 'hong',
+        //     balance: 0,
+        //     //입금
+        //     deposi: function (amount) {
+        //         this.balance += amount;
+        //     },
+        //     //출금
+        //     withdraw: function (amount) {
+        //         this.balance -= amount;
+        //     },
+        //     //이체
+        //     transfer: function (amount, otheraccount) {
+        //         this.balance -= amount;
+        //         otheraccount.balance += amount;
+        //     }
+        // }
+
+        // let yourAccount = {
+        //     name: 'kim',
+        //     balance: 10000,
+        //     //입금
+        //     deposi: function (amount) {
+        //         this.balance += amount;
+        //     },
+        //     //출금
+        //     withdraw: function (amount) {
+        //         this.balance -= amount;
+        //     },
+        //     //이체
+        //     transfer: function (amount, otheraccount) {
+        //         this.balance -= amount;
+        //         otheraccount.balance += amount;
+        //     }
+        // }
+
+        //입금 해보기
+        // console.log(myAccount.name, ": ", myAccount.balance);
+        // myAccount.deposi(10000);
+        // console.log(myAccount.name, ": ", myAccount.balance);
+        // myAccount.withdraw(3000);
+        // console.log(myAccount.name, ": ", myAccount.balance);
+        // myAccount.transfer(5000, yourAccount);
+        // console.log(myAccount.name, ": ", myAccount.balance);
+        // console.log(yourAccount.name, ": ", yourAccount.balance);
+
+
+        class ma {
+            constructor(name, balance) {
+                this.name=name;
+                this.balance = balance;
+            }
+
+            deposi(amount) {
+                this.balance += amount
+                return this.balance;
+            }
+            withdraw(amount) {
+                this.balance -= amount
+                return this.balance;
+            }
+            transfer(amount, oa) {
+                this.balance -= amount;
+                oa.balance += amount;
+            }
+
+        }
+        class oa {
+            constructor(name, balance) {
+                this.name = name;
+                this.balance = balance;
+            }
+
+            deposi(amount) {
+                this.balance += amount
+                return this.balance;
+            }
+            withdraw(amount) {
+                this.balance -= amount
+                return this.balance;
+            }
+            transfer(amount, oa) {
+                this.balance -= amount;
+                oa.balance += amount;
+            }
+
+        }
+
+        let leeacc = new ma('leee', 1000);
+        console.log(leeacc.name);
+
+
+
+        let choiacc = new oa('choi', 1000);
+        console.log(choiacc.name);
+
+
+    </script>
+</body>
+
+</html>

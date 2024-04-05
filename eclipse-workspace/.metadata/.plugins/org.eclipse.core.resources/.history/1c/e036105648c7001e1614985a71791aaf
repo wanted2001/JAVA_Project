@@ -1,0 +1,206 @@
+package ezen_messenger1;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class MailBox {
+	/*
+	 * 쪽지함 쪽지쓰기 쪽지보기 쪽지삭제 쪽지답장
+	 */
+	public void mailBoxMain (Scanner sc) throws IOException { // 매니저 메인출력용 메서드
+		int menu = -1;
+		do {
+			System.out.println("쪽지함");
+			System.out.println("1.쪽지 쓰기 | 2. 쪽지 보기 | 3. 쪽지 삭제 | 4. 쪽지 답장 | 5. 돌아 가기 ");
+			menu = sc.nextInt();
+			switch (menu) {
+			case 1:
+				writeMail(sc);
+				break;
+			case 2:
+				printMail(sc);
+				break;
+			case 3:
+				deleteMail(sc);
+				break;
+			case 4:
+				replyMail(sc);
+				break;
+			case 5:
+				break;
+			default:
+				System.out.println("잘못 누르셨습니다. ");
+			}
+		} while (menu != 5);
+		sc.close();
+	}
+
+	public void writeMail(Scanner sc) throws IOException {
+		System.out.println("쪽지를 보낼 친구이름을 입력하세요. ");
+		BufferedReader br1 = new BufferedReader(new FileReader("C:\\Messenger\\tmp.txt"));
+		String tmp1 = br1.readLine();
+		String search = sc.next();
+		String myName = tmp1.substring(tmp1.lastIndexOf("\\") + 1);
+		BufferedReader br = new BufferedReader(new FileReader(tmp1 + "\\friendsList.txt"));
+		while (true) {
+			String tmp = br.readLine();
+			if (tmp == null) {
+				break;
+			}
+			if (search.equals(tmp)) {
+				FileWriter fw = new FileWriter(tmp1 + "\\sendMailBox.txt", true); // 내발신메일함
+				FileWriter fw1 = new FileWriter("C:\\Messenger\\" + search + "\\receivedMailBox.txt", true); // 상대수신메일함
+				System.out.println("쪽지 내용을 입력해주세요. ");
+				String text = sc.next();
+				fw.write(search + "님에게 보낸 쪽지 : " + text);
+				fw.write("\r\n");
+				fw1.write(myName + "님에게 받은 쪽지 : " + text);
+				fw1.write("\r\n");
+				fw.close();
+				fw1.close();
+				System.out.println("쪽지 전송 완료. ");
+				return;
+			}
+			br1.close();
+		}
+		br.close();
+	}
+
+	public void printMail(Scanner sc) throws IOException {
+		BufferedReader br1 = new BufferedReader(new FileReader("C:\\Messenger\\tmp.txt"));
+		String tmp1 = br1.readLine();
+		System.out.println("1.발신메일함 | 2. 수신메일함 | 3. 돌아가기");
+		int menu = sc.nextInt();
+		do {
+			switch(menu) {
+			case 1 : 
+				BufferedReader br = new BufferedReader(new FileReader(tmp1 + "\\sendMailBox.txt"));
+				while(true) {
+				String line = br.readLine();
+				if(line.equals(null)) {
+					break;
+				}
+				System.out.println(line);
+			}
+			br.close();
+			break;
+			case 2 : 
+				BufferedReader br2 = new BufferedReader(new FileReader(tmp1 + "\\receivedMailBox.txt"));
+			
+				while(true) {
+					String line = br2.readLine();
+					if(line==null) {
+						break;
+					}
+					System.out.println(line);
+				}
+				br2.close();
+				
+			case 3 : mailBoxMain(sc);
+			default : System.out.println("잘못누르셨습니다. "); break;
+			}
+		}while(menu!=3);
+		
+		br1.close();
+		return;
+	}
+	public void deleteMail(Scanner sc) throws IOException {
+		BufferedReader br1 = new BufferedReader(new FileReader("C:\\Messenger\\tmp.txt"));
+		String tmp1 = br1.readLine();
+		System.out.println("1.발신메일함 | 2. 수신메일함");
+		int menu = sc.nextInt();
+		int count = 1;
+		if (menu == 1) {
+			BufferedReader br = new BufferedReader(new FileReader(tmp1 + "\\sendMailBox.txt"));
+			ArrayList<String> mail = new ArrayList<>();
+			while (true) {
+				String line = br.readLine();
+				if (line == null) {
+					break;
+				}
+				mail.add(line);
+			}
+			System.out.println("지울 쪽지 번호를 입력해주세요. ");
+			for (int i = 0; i < mail.size(); i++) {
+				System.out.println(count + "번 쪽지" + mail.get(i));
+				count++;
+			}
+			int del = sc.nextInt() - 1;
+			System.out.println("삭제 완료. ");
+			mail.remove(del);
+			FileWriter fw = new FileWriter(tmp1 + "\\sendMailBox.txt");
+			for (int i = 0; i < mail.size(); i++) {
+				fw.write(mail.get(i) + "\r\n");
+			}
+			fw.close();
+			br.close();
+		} else if (menu == 2) {
+			BufferedReader br = new BufferedReader(new FileReader(tmp1 + "\\receivedMailBox.txt"));
+			ArrayList<String> mail = new ArrayList<>();
+			while (true) {
+				String line = br.readLine();
+				if (line == null) {
+					break;
+				}
+				mail.add(line);
+			}
+			System.out.println("지울 쪽지 번호를 입력해주세요. ");
+			for (int i = 0; i < mail.size(); i++) {
+				System.out.println(count + "번 쪽지" + mail.get(i));
+				count++;
+			}
+			int del = sc.nextInt() - 1;
+			mail.remove(del);
+			FileWriter fw = new FileWriter(tmp1 + "\\receivedMailBox.txt");
+			for (int i = 0; i < mail.size(); i++) {
+				fw.write(mail.get(i));
+			}
+			br.close();
+			fw.close();
+		}
+
+		br1.close();
+	}
+
+	public void replyMail(Scanner sc) throws IOException {
+		BufferedReader br1 = new BufferedReader(new FileReader("C:\\Messenger\\tmp.txt"));
+		String tmp1 = br1.readLine();
+		String myName = tmp1.substring(tmp1.lastIndexOf("\\") + 1);
+		BufferedReader br = new BufferedReader(new FileReader("C:\\Messenger\\" + myName + "\\receivedMailBox.txt"));
+		ArrayList<String> mail = new ArrayList<>();
+		int count = 1;
+		while (true) {
+			String line = br.readLine();
+			if (line == null) {
+				break;
+			}
+			mail.add(line);
+		}
+		System.out.println("답장할 쪽지 번호를 입력해주세요. ");
+		for (int i = 0; i < mail.size(); i++) {
+			System.out.println(count + "번 쪽지" + mail.get(i));
+			count++;
+		}
+		int pick = sc.nextInt();
+		String name = mail.get(pick).substring(0, mail.get(pick).indexOf("님"));
+		FileWriter fw = new FileWriter(tmp1 + "\\sendMailBox.txt", true); // 내발신메일함
+		FileWriter fw1 = new FileWriter("C:\\Messenger\\" + name + "\\receivedMailBox.txt", true); // 상대수신메일함
+		System.out.println("쪽지 내용을 입력해주세요. ");
+		sc.nextLine();
+		String text = sc.nextLine();
+		text.replace(" ", "_");
+		fw.write(name + "님에게 보낸 쪽지 : " + text);
+		fw.write("\r\n");
+		fw1.write(myName + "님에게 받은 쪽지 : " + text);
+		fw1.write("\r\n");
+		fw.close();
+		fw1.close();
+		System.out.println("쪽지 전송 완료. ");
+		br.close();
+		br1.close();
+	}
+}

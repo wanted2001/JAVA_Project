@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            margin: 0 auto;
+            text-align: center;
+            background-color: #58ebba;
+        }
+
+        .main {
+            margin: 200px auto;
+            width: 300px;
+            height: 200px;
+            background-color: #e0dfdf;
+            border-radius: 10px;
+        }
+
+        div>input {
+            width: 270px;
+            height: 30px;
+            border-radius: 3px;
+            border: none;
+            outline-style: none;
+        }
+
+        div>.login {
+            margin-top: 10px;
+            margin-bottom: 3px;
+        }
+
+        div>.pw {
+            margin-bottom: 10px;
+        }
+
+        div>button {
+            width: 270px;
+            height: 30px;
+            border-radius: 3px;
+            border: none;
+            background-color: black;
+            color: antiquewhite;
+        }
+
+        a {
+            text-decoration: none;
+            color: gray;
+            height: 100px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .login-btn {
+            height: 80px;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" method="post">
+        <div class="main">
+            <div class="login">
+                <input type="text" class="login" name="id" placeholder="아이디">
+            </div>
+            <div class="password">
+                <input type="password" class="pw" name="password" placeholder="비밀번호">
+            </div>
+            <div class="login-btn">
+                <button type="button" id="loginbtn" disabled>로그인</button>
+            </div>
+            <div class="lostpassword">
+                <a href="">비밀번호를 잊어버리셨습니까?</a>
+            </div>
+        </div>
+    </form>
+
+    <script>
+        // ^(?=.*\d)(?=.*[az])(?=.*[AZ])(?=.).{8,15}$
+        // 아이디 8자 비밀번호 8자 이상
+        // disable = true => 비활성화
+        // disable = false => 활성화
+
+        let id = document.querySelector('.login');
+        let pw = document.querySelector('.pw');
+        const idregx = /^[a-z\d!@#$%^&*()-_+=]{8,15}$/; // 아이디는 8자 이상
+        const pwregx = /^(?=.*\d)(?=.*[a-z])(?=.*[!@#$%^&*()-_+=])[a-z\d!@#$%^&*()-_+=]{8,15}$/; // 비밀번호는 8자 이상
+        let btn = document.getElementById('loginbtn');
+
+        id.addEventListener('input', () => {
+            console.log(id.value);
+            if (idregx.test(id.value) && pwregx.test(pw.value)) {
+                btn.disabled = false;
+                btn.style.backgroundColor = "aqua";
+                console.log('버튼');
+            } else {
+                btn.disabled = true;
+                btn.style.backgroundColor = "black";
+            }
+        })
+
+        pw.addEventListener('input', () => {
+            console.log(pw.value);
+            if (idregx.test(id.value) && pwregx.test(pw.value)) {
+                btn.disabled = false;
+                btn.style.backgroundColor = "aqua";
+                console.log('버튼');
+            } else {
+                btn.disabled = true;
+                btn.style.backgroundColor = "black";
+            }
+        })
+
+
+
+
+    </script>
+</body>
+
+</html>

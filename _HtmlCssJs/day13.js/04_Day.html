@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>오늘은?</h1>
+    <button type="button" id="btn">확인</button>
+
+    <h3 id="result">
+        <!-- 
+            오늘 날짜와 요일 출력 
+            2024. 03. 19 (화)
+        -->
+    </h3>
+
+    <script>
+        // let today = new Date();3
+        // let ymd = today.toLocaleDateString();
+        // let weekday;
+        // switch(today.getDay()){
+        //     case 0 : weekday = '일.'; break;
+        //     case 1 : weekday = '월.'; break;
+        //     case 2 : weekday = '화.'; break;
+        //     case 3 : weekday = '수.'; break;
+        //     case 4 : weekday = '목.'; break;
+        //     case 5 : weekday = '금.'; break;
+        //     case 6 : weekday = '토.'; break;
+        // };
+        document.getElementById('btn').addEventListener('click', () => {
+            let today = new Date(); 3
+            let ymd = today.toLocaleDateString();
+            let weekday;
+            let result = document.getElementById('result');
+            switch (today.getDay()) {
+                case 0: weekday = '일.'; break;
+                case 1: weekday = '월.'; break;
+                case 2: weekday = '화.'; break;
+                case 3: weekday = '수.'; break;
+                case 4: weekday = '목.'; break;
+                case 5: weekday = '금.'; break;
+                case 6: weekday = '토.'; break;
+                default: weekday = '알수 없음'; break;
+            }
+            result.innerText = `${ymd} (${weekday})`;
+
+            });
+
+    </script>
+</body>
+
+</html>

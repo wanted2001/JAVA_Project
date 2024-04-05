@@ -1,0 +1,57 @@
+package ezen_messenger;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Scanner;
+
+
+public class Login {
+	
+	private String path;
+	
+
+
+	public void login(Scanner sc) throws IOException {
+	HashMap<String, String>map=new HashMap<>();
+	BufferedReader br=new BufferedReader(new FileReader("C:\\Messenger\\memberList.txt"));
+	
+	while(true) {
+		String line=br.readLine();
+		if(line==null)
+		break;
+		String ID=line.substring(0,line.indexOf(" "));
+		String PASSWORD=line.substring(line.indexOf(" ")+1);
+		map.put(ID, PASSWORD);
+	}
+	System.out.println("아이디를 입력해주세요");
+	String id=sc.next();
+	System.out.println("비밀번호를 입력해주세요");
+	String pa=sc.next();
+	for(String key:map.keySet()) {
+			if((key.equals(id))==(map.get(key).equals(pa))){
+				System.out.println("로그인에 성공하였습니다.");
+				setPath("C:\\Messenger"+"\\"+id);
+				tmpPath();
+				return ;
+				}
+			br.close();
+			}
+
+	}
+	public void tmpPath() throws IOException {
+		FileWriter fw = new FileWriter("C:\\Messenger\\tmp.txt");
+		fw.write(getPath());
+		fw.close();
+	}
+	
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+}

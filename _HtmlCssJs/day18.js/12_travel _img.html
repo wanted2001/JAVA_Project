@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        body {
+            text-align: center;
+        }
+
+        h1 {
+            border: 5px solid black;
+            width: 300px;
+            margin: 10px auto 30px;
+        }
+
+        ul {
+            padding: 0;
+            list-style: none;
+        }
+
+        ul>li {
+            display: inline;
+            margin: 10px 10px
+        }
+
+        ul>li>a {
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        img {
+            width: 50%;
+            height: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Travel</h1>
+    <ul>
+        <li><a id="home" onclick="clickcity(this)">Home</a></li>
+        <li><a id="seoul" onclick="clickcity(this)">Seoul</a></li>
+        <li><a id="tokyo" onclick="clickcity(this)">Tokyo</a></li>
+        <li><a id="paris" onclick="clickcity(this)">Paris</a></li>
+    </ul>
+    <img src="../image/images.jpg" alt="이미지 없음" id="imgchange">
+
+    <script>
+        // document.getElementById('seoul').onclick=()=>{
+        //     let s = document.getElementById('imgchange');
+        //     s.src = "../image/서울.jpg";
+        // };
+        // document.getElementById('tokyo').onclick=()=>{
+        //     let t = document.getElementById('imgchange')
+        //     t.src = "../image/도쿄.jpg";
+        // };
+        // document.getElementById('paris').onclick=()=>{
+        //    let p = document.getElementById('imgchange');
+        //     p.src = "../image/파리.jpg";
+        // };
+        // document.getElementById('home').onclick=()=>{
+        //     let h = document.getElementById('imgchange');
+        //     h.src = "../image/images.jpg";
+        // };
+
+        function clickcity(e){
+            console.log(e);
+            let idVal = e.id;
+            document.getElementById('imgchange').src = `../image/${idVal}.jpg`;
+        }
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

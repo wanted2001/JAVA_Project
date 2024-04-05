@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        String : 가장 많이 다루는 데이터 타입
+    </h1>
+    <ul>
+        <li>
+            java에서의 String method와 거의 유사함.
+        </li>
+        <li>
+            문자열 데이터는 index (0부터 시작)를 가지고 있음.
+        </li>
+        <li>
+            문자열 값 내에서 (br)를 하는 것을 추천하지 않음.
+        </li>
+        <li>
+            new string() : 객체 타입으로 선언가능 / 추천하지않음
+        </li>
+        <li>
+            length : 문자열의 총길이
+        </li>
+        <ul>
+            <li>
+                추출 관련 메서드 : substring(), substr(), slice()
+            </li>
+            <li>
+                문자를 대체하는 replace(old,new) : 처음 찾는 값만 가능
+            </li>
+            <li>
+                trim() : 양쪽 공백 제거
+            </li>
+            <li>
+                padstart(길이, 채울문자) : / padEnd(길이 채울문자)
+                010101 - 4******* / ****시
+            </li>
+            <li>
+                CharAt(index) / indexOf()
+            </li>
+            <li>
+                startwith("문자열") / endwith("문자열")
+                해당 문자열 앞 / 뒤에 문자열이 존재하는지 확인하는 메서드
+                return true / false
+            </li>
+        </ul>
+    </ul>
+    <script>
+        let str1 = "Apple, Banana, Orange"
+        console.log(str1.slice(0,5)); // 0번지 부터 5번지 까지 (마지막 번지는 포함 X)
+        // slice는 substring과 사용 방법이 같음.
+        // slice는 index -를 입력하면 뒤에서부터 추출 가능
+        console.log(str1.slice(-6));
+        // substring(startindex, endindex);
+        // substr(startindex, count);
+
+        let str2 = "Hello java World, java"
+        let newStr2 = str2.replace('java', 'javascript');
+        console.log(str2);
+        console.log(newStr2);
+        // replaceAll : 값 전체 변경
+        // /java/옵션 => /text/i(대소문자 구분 X) /text/g(전역검색)
+        newStr2 = str2.replace(/java/g , 'javascript');
+        console.log(newStr2);
+        newStr2 = str2.replace(/JAVA/ig , 'javascript');
+        console.log(newStr2);
+
+        let padText ='abc';
+        console.log(padText.padEnd(20,"-"));
+
+        //010101-3123456 => 010101-3******
+        let rnum = '010101-412345';
+        let rnumLen = rnum.length;
+        console.log(rnum.slice(0,rnum.indexOf("-")+2).padEnd(rnumLen,'*'));
+        let gender =rnum.slice(rnum.indexOf("-")+1,rnum.indexOf("-")+2);
+        //rnum의 성별을 추출 => console에 출력
+        //- 다음의 숫자가 1,3이면 남/ 아니면 여
+        if(gender==1 || gender ==3){
+            console.log('남');
+           }else if(gender==2 || gender ==4){
+            console.log('여');
+           }else {
+            console.log('알 수없는 성별입니다.')
+           }
+
+           let id = rnum.charAt(rnum.indexOf("-")+1); //7
+           console.log((id==='1'|| id==='3')?"남":"여");
+        
+           let fullFileName = "20240318_javascript.string_method.html";
+           //파일명 추출 javascript.string_method
+           console.log(fullFileName.slice(fullFileName.indexOf('_')+1,fullFileName.lastIndexOf('.')));
+           //작성일지 추출 20240318
+           console.log(fullFileName.slice(0,fullFileName.indexOf("_")));
+           //확장자만 추출 html
+           console.log(fullFileName.slice(fullFileName.lastIndexOf(".")+1));
+           
+        
+
+    </script>
+</body>
+
+</html>
