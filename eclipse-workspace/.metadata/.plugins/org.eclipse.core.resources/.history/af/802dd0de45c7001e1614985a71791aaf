@@ -1,8 +1,0 @@
-package ezen_messenger;
-
-public class MessengerManager {
-	NewAccount a = new NewAccount();
-	Login l = new Login();
-	FriendsManager f = new FriendsManager();
-	MailBox m = new MailBox();
-}
