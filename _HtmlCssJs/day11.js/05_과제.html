@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ol {
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 
+        성적확인
+        이름, 국어, 수학, 영어, 성적계산 버튼
+     -->
+    <h1>성적표 입력 하세요.</h1>
+    <form action="">
+        <fieldset>
+            <legend>성적을 입력하세요.</legend>
+            이름: <input type="text" id="name"><br>
+            국어: <input type="text" id="korean"><br>
+            영어: <input type="text" id="english"><br>
+            수학: <input type="text" id="math"><br>
+            <button type="button" onclick="gradeResult()">성적 조회</button>
+        </fieldset>
+    </form>
+
+    <ol id="grade"></ol>
+
+    <script>
+        const list = document.getElementById('grade');
+        // 합계용 function
+        const sum = function (kor, eng, ma) {
+            return kor + eng + ma;
+        }
+        // 평균용 function
+        const avg = function (param1) {
+            return param1/3;
+        }
+
+        function gradeResult() {
+            let na = document.getElementById('name').value;
+            let kor = document.getElementById('korean').value;
+            let eng = document.getElementById('english').value;
+            let ma = document.getElementById('math').value;
+            let korVal = Number(kor);
+            let engVal = Number(eng);
+            let maVal = Number(ma);
+            let sumResult = sum(korVal, engVal, maVal);
+            //.toFixed(2) : 소수점 자리 표현
+
+            list.innerHTML = `<li>이름: ${na}</li>
+                            <li>국어: ${kor}</li>
+                            <li>영어: ${eng}</li>
+                            <li>수학: ${ma}</li>
+                            <li>합계: ${Math.round (sumResult)}</li>
+                            <li>평균: ${avg(sumResult).toFixed(2)}</li>`
+        }
+    </script>
+</body>
+
+</html>

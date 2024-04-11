@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        input 2개 생성 -> 점수
+        map에 추가
+        출력 => map를 출력 ul li 형태로 출력 html : 89
+        결과 : 합계, 평균, 합격여부 60점 이상
+     -->
+
+    과목 : <input type="text" id="subject"><br>
+    점수 : <input type="text" id="score"><br>
+    <button onclick="add()">추가</button>
+    <button onclick="print()">출력</button>
+    <button onclick="result()">결과</button>
+
+    <h3 id="printsub">
+
+    </h3>
+    <h3 id="avgresult">
+
+    </h3>
+    <script>
+        const grade = new Map();
+        let sum = 0;
+        let avg = 0;
+        let sub = '';
+        let sco = 0;
+        let ps = document.getElementById('printsub');
+        let avre = document.getElementById('avgresult');
+        ps.innerHTML = `<ul>`;
+
+        function add(sub, sco) {
+            sub= document.getElementById('subject').value;
+            sco = document.getElementById('score').value;
+            grade.set(sub, sco);
+            console.log(grade);
+        }
+
+        function print() {
+            grade.forEach(function (v, i) {
+                ps.innerHTML += `<li>${i} : ${v}</li>`;
+            });
+            ps.innerHTML += `</ul>`;
+            console.log(ps);
+        }
+
+        function result() {
+            grade.forEach(function (v) {
+                sum += Number(v);
+            });
+            avg = sum / grade.size;
+            avre.innerHTML = `과목의 점수 합계 : ${sum}, 평균 : ${avg.toFixed(2)} 합격여부 : ${(avg >= 60) ? '합격' : '불합격'}`;
+            console.log(avg);
+            console.log(sum);
+        }
+        </script>
+</body>
+
+</html>

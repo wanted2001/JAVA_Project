@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            background-color: white;
+        }
+
+        img {
+            width: 250px;
+            height: 200px;
+        }
+
+        h1 {
+            background-color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <button type="button" id="s" onclick="prin(1)"><img src="../image/다운로드.jpg" alt="">
+            <h1>가위 (1)</h1>
+        </button>
+        <button type="button" id="r" onclick="prin(2)"><img src="../image/바위.jpg" alt="">
+            <h1>바위 (2)</h1>
+        </button>
+        <button type="button" id="p" onclick="prin(3)"><img src="../image/보.jpg" alt="">
+            <h1>보 (3)</h1>
+        </button>
+    </div>
+    <h3 id="h3">
+        가위바위보 게임<br>
+        현재 전적 / 승률<br>
+    </h3>
+    <script>
+
+        let win = 0;
+        let lose = 0;
+        let draw = 0;
+        let rsp = '';
+        let han = 'player가 ';
+        let count = 0;
+        let h = document.getElementById('h3') // 랜덤 수 만들기
+        let h3 = document.getElementById('h3').innerHTML;
+        // let rate =(win/((10-draw))*100).toFixed(2);
+
+        function prin(player) {
+            let com = Math.floor(Math.random() * 3) + 1;
+            switch (player) {
+                case 1:
+                    //가위 무 패 승
+                    (com == 1) ? draw++ : (com == 2) ? lose++ : win++;
+                    hangeul(com);
+                    break;
+                case 2:
+                    //바위
+                    (com == 2) ? draw++ : (com == 3) ? lose++ : win++;
+                    hangeul(com);
+                    break;
+                case 3:
+                    //보
+                    (com == 3) ? draw++ : (com == 1) ? lose++ : win++;
+                    hangeul(com);
+                    break;
+                default: break;
+            }
+            console.log(player);
+            console.log(com);
+            console.log("=================")
+            console.log(win + "/");
+            console.log(lose + "/");
+            console.log(draw + "/");
+            console.log("=================")
+            count++;
+            console.log(count);
+            result();
+        }
+        function result() {
+            h.innerHTML = `${h3}${han}<br>승:${win} / 무: ${draw} / 패: ${lose} <br> 승률 : ${(((count - draw - lose) + 0.5 * draw) * 100 / count).toFixed(2)}`;
+        }
+        function hangeul(b) {
+            han +=(b == 1) ? '비겼습니다.' : (b == 2) ? "졌습니다." : "이겼습니다.";
+        }
+
+    </script>
+</body>
+
+</html>

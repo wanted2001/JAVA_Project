@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 야구게임 validation 사용해서 숫자인지 아닌지 판별-->
+    <h1>컴퓨터가 숫자 0~9까지 중복되지않는 정수 3개를 랜덤으로 출제 맞추는 게임</h1>
+    <ul>
+        <li>세자리의 숫자는 중복되면 안됨. (각 숫자는 자리수를 갖고 있음)</li>
+        <li>각 자리수와 입력한 숫자가 일치하면 1 Strike</li>
+        <li>숫자만 포함되어 있으면 1 Ball</li>
+        <li>숫자가 전혀 없으면 Out</li>
+        <li>3 Strike면 게임 종료</li>
+    </ul>
+    <hr>
+    <button type="button" id="startBtn">게임 시작</button>
+    <h2 id="comMsg"></h2>
+    숫자 입력: <input type="text" id="myNum">
+    <button type="button" id="tryBtn">게임 확인</button>
+    <ol id="tries"></ol>
+
+    <script>
+        
+        const comSet = new Set();
+        console.log(comSet);
+        let comNums = [];
+        let count = 0;
+        const comMsg = document.getElementById('comMsg');
+        const tries = document.getElementById('tries');
+
+        document.getElementById('startBtn').addEventListener('click',makeGame);
+        document.getElementById('tryBtn').addEventListener('click',compareNum);
+
+        function compareNum() {
+            if(comSet.size <= 0){
+                alert("게임 시작 버튼을 눌러주세요");
+                return;
+            }
+            count++;
+            let myNumVal = document.getElementById('myNum');
+            if (validMyNum(myNumVal.value)) {
+                console.log('밸류 통과');
+                let myNums = myNumVal.value.split('');
+                console.log(myNums);
+
+                let strike = 0, ball = 0;
+                // 컴숫자 기준
+                for (let i = 0; i < comNums.length; i++) {
+                    // 내숫자 기준
+                    for (let j = 0; j < myNums.length; j++) {
+                        if (comNums[i] == myNums[j]) {
+                            //자리도 같다면
+                            if (i == j) {
+                                strike++;
+                            } else {
+                                ball++;
+                            }
+                            break;
+                        }
+                    }
+                }
+                if (strike == 0 && ball == 0) {
+                    tries.innerHTML += `<li>${myNums} OUT~~!!!!!!!!! </li>`;
+                } else {
+                    if (strike == 3){
+                        tries.innerHTML += `<li>${myNums} => success!!!</li>`;
+                    }else{
+                        tries.innerHTML += `<li>${myNums} => ${strike}strike, ${ball}ball</li>`;
+                    }
+                }
+
+            } else {
+                console.log('valid 통과 X');
+            }
+            myNumVal.value = '';
+            myNumVal.focus();
+        };
+
+        function makeGame() {
+            // 기존값 초기화
+            comNums = [];
+            comSet.clear();
+            do {
+                let rNum = Math.floor(Math.random() * 10);
+                comSet.add(rNum);
+            } while (comSet.size < 3);
+            console.log(comSet);
+
+            //set을 배열에 저장
+            comSet.forEach((v) => {
+                comNums.push(v);
+            });
+            console.log(comNums);
+
+            comMsg.innerText = '컴퓨터가 숫자를 결정하였습니다.';
+            // 이전 게임내역 초기화
+            tries.innerText = '';
+        };
+
+        // 숫자가 아닌게 맞는지 확인 (true면 문자) 값 = false(숫자)
+        // '123' => 숫자로 인지 '문자' => 문자로 인지
+        // console.log(isNaN(''));
+
+        // 검증
+        // 숫자 3자리, 숫자만 가능, 중복값 X, 
+        function validMyNum(myNum) {
+            if (myNum.length != 3) {
+                return false;
+            } else if (isNaN(myNum)) {
+                return false;
+            } else if (new Set(myNum.split('')).size != 3) {
+                return false;
+            } else {
+                return true;
+            }
+        };
+        // console.log(validMyNum('123'));
+
+
+    </script>
+
+</body>
+
+</html>

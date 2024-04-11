@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&display=swap" rel="stylesheet">
+
+    <!-- https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json -->
+    <style>
+        .wrap {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .wrap>.top>h1 {
+            font-size: 60px;
+        }
+
+        .top {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .bottom {
+            display: flex;
+        }
+
+        .bottom>div {
+            margin: 0 20px;
+        }
+
+        h1 {
+            font-family: "Bagel Fat One", system-ui;
+            font-weight: 400;
+            font-size: 30px;
+            font-style: normal;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="top">
+            <h1 id="squad"></h1>
+            <p id="info"></p>
+        </div>
+        <div class="bottom">
+            <div class="">
+                <h1 id="hero1"></h1>
+                <p id="info1">
+
+                </p>
+            </div>
+            <div class="">
+                <h1 id="hero2"></h1>
+                <p id="info2">
+
+                </p>
+            </div>
+            <div class="">
+                <h1 id="hero3"></h1>
+                <p id="info3">
+
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script>
+        let h = document.getElementById('squad');
+        let p = document.getElementById('info');
+
+        async function asyncFun() {
+            try {
+                const hero = await fetch(`https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json`);
+                const heroinfo = await hero.json();
+                h.innerText = heroinfo.squadName;
+                p.innerText = "Hometown : " + heroinfo.homeTown + " // Formed : " + heroinfo.formed;
+                for (let i = 0; i <= 2; i++) {
+                    document.getElementById(`hero${i + 1}`).innerText = heroinfo.members[i].name;
+                    document.getElementById(`info${i + 1}`).innerHTML = `SecretIdentity : ${heroinfo.members[i].secretIdentity}<br>Age : ${heroinfo.members[i].age}<br>Powers :`;
+                    document.getElementById(`info${i + 1}`).innerHTML += `<ul id="ul${i+1}">`;
+                }
+                for (let i = 0; i <= 2; i++) {
+                    for (let j = 0; j < heroinfo.members[i].powers.length; j++) {
+                        document.getElementById(`ul${i + 1}`).innerHTML += `<li>"${heroinfo.members[i].powers[j]}"</li>`;
+                    }
+                    document.getElementById(`info${i + 1}`).innerHTML += `</ul>`;
+                }
+
+
+            } catch (error) {
+                console.log(error);
+            } finally {
+                console.log('await Finish');
+            }
+        }
+
+        asyncFun();
+
+
+
+    </script>
+</body>
+
+</html>
