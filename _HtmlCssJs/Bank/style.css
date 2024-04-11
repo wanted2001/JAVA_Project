@@ -1,0 +1,83 @@
+* {
+    font-family: "Noto Sans KR", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+}
+
+.foot {
+    display: flex;
+    width: 1000px;
+    height: 200px;
+    justify-content: space-around;
+    padding-top: 100px;
+}
+
+footer p {
+    font-weight: 700;
+    margin: 0;
+    padding: 10px;
+}
+
+.accordion {
+    width: 1000px;
+}
+
+.accordion-item {
+    /* 아코디언을 감싸고 있는 전체 div */
+    border: none;
+}
+
+.accordion-button {
+    /* 버튼색 변경 */
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgba(101, 129, 252, 0.582);;
+    border-top: none;
+}
+
+.accordion-button:hover {
+    /* 버튼 클릭시 배경색 */
+    background-color: rgba(101, 129, 252, 0.582);
+    border: 1px solid rgba(101, 129, 252, 0.582);
+    border-top: none;
+}
+
+.accordion-button:focus {
+    /* 아코디언선택되면 쉐도우 지움  */
+    box-shadow: none;
+}
+
+.accordion-body {
+    background-color: rgb(255, 255, 255);
+    /* 배경색 변경 */
+    padding: 15px;
+    /* 여백 추가 */
+    border: 1px solid rgba(101, 129, 252, 0.582);
+    /* 테두리 추가 */
+    border-top: none;
+    /* 상단 테두리 제거 */
+    border-radius: 0 0 .25rem .25rem;
+    /* 둥근 모서리를 상단 왼쪽과 오른쪽에만 적용 */
+}
+
+.accordion-body code {
+    background-color: rgb(233, 236, 239);
+    /* 코드 배경색 변경 */
+    padding: 2px 4px;
+    /* 코드 주변 여백 추가 */
+    border-radius: 3px;
+    /* 둥근 모서리 추가 */
+}
+
+.firstaccop {
+    /* 상품안내 금리정보 상품설명서 및 이용약관 색상변경 */
+    font-weight: 700;
+    color: rgb(0, 0, 0);
+}

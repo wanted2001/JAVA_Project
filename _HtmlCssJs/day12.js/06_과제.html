@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form action="">
+        이름: <input type="text" id="na"><br>
+        주민번호: <input type="text" id="rn"><br>
+        <button type="button" onclick="sub()">확인</button>
+    </form>
+
+    <h1 id="h1"></h1>
+
+    <script>
+        function sub() {
+            let h1 = document.getElementById('h1');
+            let name = document.getElementById('na').value;
+            let rnum = document.getElementById('rn').value;
+            let birth = rnum.slice(0, rnum.indexOf("-"));
+            let id = rnum.charAt(rnum.indexOf("-") + 1);
+            let age = function (id) {
+                let since = 0;
+                let bir = rnum.slice(0, 1);
+                parseInt(since);
+                parseInt(bir);
+                if (id === '1' || id === '2') {
+                    since = 1900;
+                } else if(id === '3' || id === '4'){
+                    since = 2000;
+                }
+                bir += since + bir;
+                return 2024 - bir;
+            };
+
+            let gender = (id === '1' || id === '3') ? "남" : "여";
+
+            h1.innerText = `이름: ${name}, 생년월일: ${birth}, 나이: ${age(id)}, 성별: ${gender}`
+        }
+
+    </script>
+    <!-- <script>
+        let h1 = document.getElementById('h1');
+        let name = document.getElementById('na').value;
+        let rnum = document.getElementById('rn').value;
+        let birth = rnum.slice(0,rnum.indexOf("-"));
+        let age = 24-parseInt(rnum.slice(0,1));
+        let id = rnum.charAt(rnum.indexOf("-")+1);
+        let gender = (id==='1'|| id==='3')?"남":"여";
+        document.getElementById('sub').addEventListener('click',()=>{
+            h1.innerText = `이름: ${name}, 생년월일: ${birth}, 나이: ${age}, 성별: ${gender}`
+        })
+    </script> -->
+</body>
+
+</html>

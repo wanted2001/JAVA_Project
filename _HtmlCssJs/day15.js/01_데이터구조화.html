@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>
+        많은 양의 데이터가 실시간으로 전달되어야할 때 가장 효율적인 방법으로
+        데이터를 보내는 방법
+        데이터 구조화 => 구조화된 텍스트 => JSON
+    </h1>
+    <ul>
+        <li>
+            JSON(JavaScript Object Notation)
+            JavaScript 객체를 구조화된 데이터로 표현하기 위한 문자기반 표준 포맷
+        </li>
+        <li>
+            웹서버 (->) 화면 데이터를 전송할때 일반적으로 사용
+        </li>
+        <li>
+            자바 스크립트에 객체 형태를 가지고 있다. 구조 파악이 쉽고, 제작도 쉽다.
+        </li>
+        <li>
+            특히 웹분야의 자바 스크립트가 모든 프론트에 호출된다는 점을 활용
+            데이터 수집, 출력용으로 거의 모든 플랫폼 서비스에서 사용되고 있음.
+        </li>
+    </ul>
+    <script>
+        //https://finance.naver.com/ 거래상위 종목을 구조화 
+        const top = {
+            '거래상위': [
+                {
+                    name: 'KODEX 200선물인버스2x',
+                    price: 2060,
+                    updown: -70,
+                    ratio: -3.29
+                },
+                {
+                    name: '대영포장',
+                    price: 1981,
+                    updown: 256,
+                    ratio: 14.84
+                }, {}, {}, {}
+            ],
+            '상승': [
+                {}, {}, {}, {}
+            ],
+            '하락': [
+                {}, {}, {}, {}
+            ],
+            '시가총액 상위': [
+                {}, {}, {}, {}
+            ]
+        }
+        //환전 고시 환율
+        const exs = {
+            'exchage': [
+                {
+                    name : '미국USD',
+                    price : 1326.50 ,
+                    updown : -14,
+                },
+                {
+                    name : '일본JPY(100엔)',
+                    price : 882.13 ,
+                    updown : -1.67,
+                },
+                {
+                    name : '유럽연합EUR',
+                    price : 1450.93 ,
+                    updown : -2.24,
+                },
+                {
+                    name : '중국CNY',
+                    price : 184.16 ,
+                    updown : -1.70,
+                },
+
+            ],
+            'gold' : [
+                {
+                    name : '국제금(03.20)',
+                    price : 2161,
+                    updown : 1.30
+                },
+                {
+                    name : '국내금(03.21)',
+                    price : 94148.40,
+                    updown : 1145.86
+                }
+            ]
+        }
+    </script>
+</body>
+
+</html>
